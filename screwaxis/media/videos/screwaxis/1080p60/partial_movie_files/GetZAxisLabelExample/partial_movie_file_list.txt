@@ -1,0 +1,5 @@
+# This file is used internally by FFMPEG.
+file 'file:/home/shervin/Documents/manimprojects/screwaxis/media/videos/screwaxis/1080p60/partial_movie_files/GetZAxisLabelExample/3513205643_1451114810_2813929986.mp4'
+file 'file:/home/shervin/Documents/manimprojects/screwaxis/media/videos/screwaxis/1080p60/partial_movie_files/GetZAxisLabelExample/3830399341_1515588106_2358446478.mp4'
+file 'file:/home/shervin/Documents/manimprojects/screwaxis/media/videos/screwaxis/1080p60/partial_movie_files/GetZAxisLabelExample/3830399341_2827555739_1167900085.mp4'
+file 'file:/home/shervin/Documents/manimprojects/screwaxis/media/videos/screwaxis/1080p60/partial_movie_files/GetZAxisLabelExample/3830399341_1515588106_2762190605.mp4'

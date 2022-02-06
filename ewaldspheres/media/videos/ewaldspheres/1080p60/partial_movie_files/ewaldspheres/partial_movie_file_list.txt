@@ -1,0 +1,5 @@
+# This file is used internally by FFMPEG.
+file 'file:/home/shervin/Documents/manimprojects/ewaldspheres/media/videos/ewaldspheres/1080p60/partial_movie_files/ewaldspheres/3513205643_1451114810_2813929986.mp4'
+file 'file:/home/shervin/Documents/manimprojects/ewaldspheres/media/videos/ewaldspheres/1080p60/partial_movie_files/ewaldspheres/3830399341_1515588106_1345957900.mp4'
+file 'file:/home/shervin/Documents/manimprojects/ewaldspheres/media/videos/ewaldspheres/1080p60/partial_movie_files/ewaldspheres/3830399341_3427470268_3662206398.mp4'
+file 'file:/home/shervin/Documents/manimprojects/ewaldspheres/media/videos/ewaldspheres/1080p60/partial_movie_files/ewaldspheres/3830399341_1515588106_4042888641.mp4'

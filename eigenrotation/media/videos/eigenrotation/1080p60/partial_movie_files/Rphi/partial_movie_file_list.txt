@@ -1,0 +1,9 @@
+# This file is used internally by FFMPEG.
+file 'file:/home/shervin/Documents/manimprojects/eigenrotation/media/videos/eigenrotation/1080p60/partial_movie_files/Rphi/2724823860_3315777900_1191792337.mp4'
+file 'file:/home/shervin/Documents/manimprojects/eigenrotation/media/videos/eigenrotation/1080p60/partial_movie_files/Rphi/1164547788_3493041802_214181048.mp4'
+file 'file:/home/shervin/Documents/manimprojects/eigenrotation/media/videos/eigenrotation/1080p60/partial_movie_files/Rphi/1164547788_3228074690_3124517543.mp4'
+file 'file:/home/shervin/Documents/manimprojects/eigenrotation/media/videos/eigenrotation/1080p60/partial_movie_files/Rphi/1164547788_2091062294_3124517543.mp4'
+file 'file:/home/shervin/Documents/manimprojects/eigenrotation/media/videos/eigenrotation/1080p60/partial_movie_files/Rphi/1164547788_3949306011_2046090776.mp4'
+file 'file:/home/shervin/Documents/manimprojects/eigenrotation/media/videos/eigenrotation/1080p60/partial_movie_files/Rphi/1164547788_895330206_2046090776.mp4'
+file 'file:/home/shervin/Documents/manimprojects/eigenrotation/media/videos/eigenrotation/1080p60/partial_movie_files/Rphi/1164547788_1842642701_3160367289.mp4'
+file 'file:/home/shervin/Documents/manimprojects/eigenrotation/media/videos/eigenrotation/1080p60/partial_movie_files/Rphi/1164547788_3493041802_2568632065.mp4'
