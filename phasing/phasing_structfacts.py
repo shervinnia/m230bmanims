@@ -7,8 +7,22 @@ intro_tts = gTTS(text=intro, lang='en')
 intro_tts.save("phasing_structfacts_intro.mp3")
 
 
-class StructFactor(MovingCameraScene):
+class StructFactor(ZoomedScene):
+    def __init__(self, **kwargs):
+        ZoomedScene.__init__(
+            self,
+            zoom_factor=0.3,
+            zoomed_display_height=3,
+            zoomed_display_width=3,
+            image_frame_stroke_width=20,
+            zoomed_camera_config={
+                "default_frame_stroke_width": 3,
+                },
+            **kwargs
+    )
     def construct(self):
+        Title = MathTex(r'\textrm{The Phase Problem and Isomorphous Replacement}').move_to(ORIGIN+UP)
+        subtitle = MathTex(r'\textrm{by Shervin Nia}').next_to(Title, DOWN)
         color1 = "#3498DB"
         color2 = "#9834DB"
         color3 = "#D4B638"
@@ -22,6 +36,8 @@ class StructFactor(MovingCameraScene):
         F = Arrow(ORIGIN,f4.get_end(),buff=0,color=color2)
         Fline = Line(start=ORIGIN,end=F.get_end())
         Fdot = Dot(point=F.get_end(),color=color2)
+
+        Fcopy = F.copy()
 
         F2 = F.copy()
         F2.rotate_about_origin(15*PI/16)
@@ -42,9 +58,10 @@ class StructFactor(MovingCameraScene):
         FH2circle = Fcircle.copy()
         tip_text = MathTex(r'\vec{F}',color=color2).next_to([0.5,1.5,0], RIGHT*1.2)
         tex = MathTex(r"\phi").next_to(phiangle,RIGHT*0.3 + UP*0.1)
-        Fmagtex=MathTex(r'|\vec{F_P}|',color=color2).next_to(Fdot,LEFT*0.5+DOWN*0.1)
-        FPH1tex=MathTex(r'|\vec{F}_{PH1}|', color=color4)
-        FPH2tex=MathTex(r'|\vec{F}_{PH2}|', color=color5)
+        #Fmagtex=MathTex(r'|\vec{F_P}|',color=color2).next_to(Fdot,LEFT*0.5+DOWN*0.1)
+        Fmagtex=MathTex(r'|\vec{F_P}|',color=color2).move_to([6,3,0])
+        FPH1tex=MathTex(r'|\vec{F}_{PH1}|', color=color4).next_to(Fmagtex, DOWN)
+        FPH2tex=MathTex(r'|\vec{F}_{PH2}|', color=color5).next_to(FPH1tex, DOWN)
 
         axes = Axes(
                             x_range=(-14.222,14.222,1),
@@ -56,7 +73,11 @@ class StructFactor(MovingCameraScene):
                             }
                             )        
         
-        self.add_sound("phasing_structfacts_intro.mp3")
+        #self.add_sound("phasing_structfacts_intro.mp3")'
+        self.play(Write(Title))
+        self.play(Write(subtitle))
+        self.wait(2)
+        self.play(Unwrite(Title), Unwrite(subtitle))
         self.play(Write(axes))
         self.play(self.camera.frame.animate.scale(0.6).move_to([1,1.5,0]))
         self.wait()
@@ -71,7 +92,7 @@ class StructFactor(MovingCameraScene):
         self.wait()
         self.play(GrowArrow(f4))
         self.wait(3)
-        self.play(Create(F))
+        self.play(GrowArrow(F))
         self.wait(2)
         self.play(Write(tip_text))
         self.play(Write(phiangle),Write(tex))
@@ -96,20 +117,38 @@ class StructFactor(MovingCameraScene):
         self.play(self.camera.frame.animate.scale(1.3))
         self.play(Create(FH1circle))
         #self.play(Create(F2))
-        self.play(GrowArrow(fh1))
-        self.play(GrowArrow(fh2))
-        self.wait(1)
-        self.play(FH1circle.animate.move_to(fh1.get_end()))
-        self.play(FH2circle.animate.move_to(fh2.get_end()))
+        self.play(GrowArrow(fh1),FH1circle.animate.move_to(fh1.get_end()))
+        self.play(GrowArrow(fh2),FH2circle.animate.move_to(fh2.get_end()))
         self.wait(0.5)
-        self.play(FH1circle.animate.set_color(color4))
-        self.wait(0.5)
-        self.play(FH2circle.animate.set_color(color5))
+        self.play(FH1circle.animate.set_color(color4), FH2circle.animate.set_color(color5))
+        self.play(Write(FPH1tex), Write(FPH2tex))
+
+        zoomed_camera = self.zoomed_camera
+        zoomed_display = self.zoomed_display
+        frame = zoomed_camera.frame
+        zoomed_display_frame = zoomed_display.display_frame
+
+
+
+        frame.move_to(Fdot)
+        frame.set_color(color1)
+        zoomed_display_frame.set_color(color1)
+        zoomed_display.move_to([6,-2.5,0])
+
+        self.play(Create(frame))
+        self.activate_zooming()
+        self.play(self.get_zoomed_display_pop_out_animation())
+        self.wait(2)
+
+        self.play(DrawBorderThenFill(Fcopy))
 
         self.wait(5)
 
         self.play(
-            Unwrite(Fmagtex))
+            Unwrite(Fmagtex),
+            Unwrite(FPH1tex),
+            Unwrite(FPH2tex),
+            Uncreate(Fcopy))
         self.wait(0.2)
         self.play(Unwrite(axes))
         self.wait(0.5)
@@ -117,7 +156,9 @@ class StructFactor(MovingCameraScene):
         self.play(
             Uncreate(Fcircle),
             Uncreate(FH1circle),
-            Uncreate(FH2circle))
+            Uncreate(FH2circle),
+            Uncreate(zoomed_display_frame),
+            FadeOut(frame))
         self.wait(0.5)
 
 
