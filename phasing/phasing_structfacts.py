@@ -11,6 +11,9 @@ class StructFactor(MovingCameraScene):
     def construct(self):
         color1 = "#3498DB"
         color2 = "#9834DB"
+        color3 = "#D4B638"
+        color4 = "#F1F061"
+        color5 = "#C15D86"
         self.camera.frame.save_state()
         f1 = Arrow(ORIGIN, [ 2, 0, 0], buff=0, stroke_width = 5)
         f2 = Arrow(f1.get_end(), [ 2, 2, 0], buff=0, stroke_width = 5)
@@ -20,12 +23,29 @@ class StructFactor(MovingCameraScene):
         Fline = Line(start=ORIGIN,end=F.get_end())
         Fdot = Dot(point=F.get_end(),color=color2)
 
+        F2 = F.copy()
+        F2.rotate_about_origin(15*PI/16)
+        #Rotate(F2, angle=15*PI/16, about_point=ORIGIN)
+        F2.shift(F.get_end())
+
+        F3=F.copy()
+        F3.rotate_about_origin(-1*15*PI/16)
+        F3.shift(F.get_end())
+
+        fh1 = Arrow(ORIGIN, F2.get_end(), buff=0, stroke_width = 5, color=color3)
+        fh2 = Arrow(ORIGIN, F3.get_end(), buff=0, stroke_width = 5, color=color5)
+
         zeroline = Line(start=ORIGIN,end=[1,0,0])
         phiangle = Angle(zeroline,Fline)
         Fcircle=Circle(radius=F.get_length(),color=color2).rotate(phiangle.get_value())
+        FH1circle = Fcircle.copy()
+        FH2circle = Fcircle.copy()
         tip_text = MathTex(r'\vec{F}',color=color2).next_to([0.5,1.5,0], RIGHT*1.2)
         tex = MathTex(r"\phi").next_to(phiangle,RIGHT*0.3 + UP*0.1)
-        Fmagtex=MathTex(r'|\vec{F}|',color=color2).next_to(Fdot,LEFT*0.5+DOWN*0.1)
+        Fmagtex=MathTex(r'|\vec{F_P}|',color=color2).next_to(Fdot,LEFT*0.5+DOWN*0.1)
+        FPH1tex=MathTex(r'|\vec{F}_{PH1}|', color=color4)
+        FPH2tex=MathTex(r'|\vec{F}_{PH2}|', color=color5)
+
         axes = Axes(
                             x_range=(-14.222,14.222,1),
                             y_range=(-8,8,1),
@@ -73,13 +93,31 @@ class StructFactor(MovingCameraScene):
                   Uncreate(Fdot))
         self.play(Write(Fmagtex))
         self.wait(5)
+        self.play(self.camera.frame.animate.scale(1.3))
+        self.play(Create(FH1circle))
+        #self.play(Create(F2))
+        self.play(GrowArrow(fh1))
+        self.play(GrowArrow(fh2))
+        self.wait(1)
+        self.play(FH1circle.animate.move_to(fh1.get_end()))
+        self.play(FH2circle.animate.move_to(fh2.get_end()))
+        self.wait(0.5)
+        self.play(FH1circle.animate.set_color(color4))
+        self.wait(0.5)
+        self.play(FH2circle.animate.set_color(color5))
+
+        self.wait(5)
+
         self.play(
             Unwrite(Fmagtex))
         self.wait(0.2)
         self.play(Unwrite(axes))
         self.wait(0.5)
+        self.play(Unwrite(fh1), Unwrite(fh2))
         self.play(
-            Uncreate(Fcircle))
+            Uncreate(Fcircle),
+            Uncreate(FH1circle),
+            Uncreate(FH2circle))
         self.wait(0.5)
 
 
